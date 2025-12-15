@@ -8,6 +8,9 @@ const notificationRoutes = require('./routes/notificationRoutes');
 const blogRoutes = require('./routes/blogRoutes');
 const vetRoutes = require('./routes/vetRoutes');
 
+const reportsRouter = require('./routes/reports');
+app.use('/api/reports', reportsRouter);
+
 const app = express();
 
 // Middleware
