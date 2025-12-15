@@ -58,3 +58,56 @@ const reportSchema = new mongoose.Schema({
   
   // ... rest of your existing fields ...
 });
+// models/Report.js
+const mongoose = require('mongoose');
+
+const reportSchema = new mongoose.Schema({
+  
+  reportedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  
+  status: {
+    type: String,
+    enum: [
+      'Pending',
+      'Rescued',
+      'Under Treatment',
+      'Ready for Adoption',
+      'Adopted',
+      'Closed'
+    ],
+    default: 'Pending'
+  },
+  
+  issueType: {
+    type: String,
+    enum: [
+      'Injured',
+      'Sick',
+      'Abandoned',
+      'Stray',
+      'Abused',
+      'Other'
+    ],
+    required: true
+  },
+  
+  animalType: {
+    type: String,
+    required: true
+  },
+  
+  location: String,
+  description: String,
+  photoURL: String,
+  
+  // ... your other existing fields ...
+  
+}, {
+  timestamps: true  // ⚠️ IMPORTANT: This adds createdAt field for monthly stats
+});
+
+module.exports = mongoose.model('Report', reportSchema);
