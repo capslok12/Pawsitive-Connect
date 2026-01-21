@@ -1,0 +1,17 @@
+# render.yaml
+services:
+  - type: web
+    name: paws-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        fromDatabase:
+          name: paws-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
